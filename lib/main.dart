@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'daily_challenge.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(demoProjectId: 'demo-cloud-quest');
@@ -43,7 +45,7 @@ class AuthGate extends StatelessWidget {
         if (snapshot.hasError) {
           return Scaffold(
             appBar: AppBar(title: const Text('Cloud Quest')),
-            body: const Center(child: Text('Could not check your sign-in.')),
+            body: const DailyChallenge(),
           );
         }
 
