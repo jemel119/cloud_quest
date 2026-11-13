@@ -40,3 +40,4 @@ export const completeToday = onCall(async (request) => {
     return { ...reward, alreadyCompleted: false };
   });
 });
+export { askQuestCoach } from "./questCoach.js";
