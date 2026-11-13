@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
+import 'quest_coach.dart';
+
 class DailyChallenge extends StatefulWidget {
   const DailyChallenge({super.key, required this.uid});
 
@@ -85,6 +87,8 @@ class _DailyChallengeState extends State<DailyChallenge> {
               Text(title, style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 12),
               Text(prompt),
+              const SizedBox(height: 24),
+              const QuestCoach(),
               const SizedBox(height: 24),
               StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                 stream: _progress,
