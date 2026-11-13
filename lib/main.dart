@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 import 'daily_challenge.dart';
 
@@ -17,7 +18,7 @@ Future<void> main() async {
   final auth = FirebaseAuth.instance;
   await auth.useAuthEmulator(emulatorHost, 9099);
   FirebaseFirestore.instance.useFirestoreEmulator(emulatorHost, 8080);
-
+  FirebaseFunctions.instance.useFunctionsEmulator(emulatorHost, 5001);
   runApp(CloudQuestApp(home: AuthGate(auth: auth)));
 }
 
@@ -45,7 +46,7 @@ class AuthGate extends StatelessWidget {
         if (snapshot.hasError) {
           return Scaffold(
             appBar: AppBar(title: const Text('Cloud Quest')),
-            body: const DailyChallenge(),
+            body: const Center(child: Text('Could not check your sign-in.')),
           );
         }
 
@@ -86,7 +87,7 @@ class AuthGate extends StatelessWidget {
               ),
             ],
           ),
-          body: Center(child: Text('Signed in as ${user.email ?? 'learner'}')),
+          body: DailyChallenge(key: ValueKey(user.uid), uid: user.uid),
         );
       },
     );
